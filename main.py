@@ -1,12 +1,15 @@
 import os
 from bs4 import BeautifulSoup
+import bs4
 import requests
 import re
 from re import sub
 from decimal import Decimal
 import io
-from datetime import datetime
-
+from datetime import datetime 
+import random
+from time import sleep
+import csv
 
 now_year = datetime.now().year 
 now_month = datetime.now().month
@@ -30,48 +33,91 @@ def days_in_month(month, year):
 
 url_list = []    
 
-for year in range(1996, now_year+1):
-    
+for year in range(1996, now_year+1):   
     
     for month in range(1, 13):
-        if year == now_year and month == now_month and day == now_day:
+       
+        if year == now_year and month > now_month and day >= now_day:
                  break
-        day = 1       
+       
+        day = 1  
+
         while day <= days_in_month(month, year):   
             
+            if year == 1996 and month == 1 and day <= 4:
+             day += 1   
+             continue 
+
             url = f'https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To={str(day).zfill(2)}.{str(month).zfill(2)}.{year}'
             url_list.append(url)
 
-            if year == now_year and month == now_month and day > now_day:
+            if year == now_year and month == now_month and day >= now_day:
                  break
      
             day += 1
 
-with open('url_list.txt', 'a') as file:
+with open('datasets/url_list.txt', 'a') as file:
      for line in url_list:
-        file.write(f'{line}\n')
+        file.write(f'{line}\n') 
 
-# html_text = requests.get(url)
+headers = {
+     "Accept": "*/*", 
+     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+}
+
+with open('datasets/url_list.txt') as file:
+     
+     lines = [line.strip() for line in file.readlines()]
+     data = []
+     count = 0
+     for line in lines:
+          html_text = requests.get(line, headers=headers)
+          result = html_text.text
+          print(count)
+          soup = BeautifulSoup(result, 'lxml')
+          
+          date = soup.find('button', class_ = 'datepicker-filter_button').text
+          try:
+            course = soup.find('td', string = 'USD').find_next().find_next().find_next().text
+          except:
+               print(None)
+               pass
+          data.append(f'{date}, {course}')
+          sleep(random.randrange(1, 3))
+          count += 1
+          if count % 100 == 0:
+               print(f'Загружено {count} дней')         
+ 
+
+with open('datasets/dataset.csv', 'a') as file:
+     for line in data:
+          file.write(f'{line}\n')
+
+
+# url = 'https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=02.07.2004'
+# html_text = requests.get(url, headers=headers)
 # result = html_text.text
 # soup = BeautifulSoup(result, 'lxml')
 
-# print(f'{str(day).zfill(2)}.{str(month).zfill(2)}.{year}')             
-            
-# block_usd = soup.find('table', class_ = 'data').find_all('tr')[14]
-# course = block_usd.find_all('td')[4].text
+# date = soup.find('button', class_ = 'datepicker-filter_button').text
+# find_usd = soup.find('td', string = 'USD').text
+# course = soup.find('td', string = 'USD').find_next().find_next().find_next().text
 
-
+# print(f'Страна: {find_usd}, курс: {course}, на {date}') 
+     
+          
+     
     
 
-# # for i in range('05.01.1996', '12.10.2023'):
-# #     url = f'https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To={i}'
+# course = block_usd.find_all('td')[4].text
+# print(course)
 
 
-# url = range('https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To={day}.{month}.{year}')
-# html_text = requests.get(url).text
-# soup = BeautifulSoup(html_text, 'lxml')
-
-
+# html_text = requests.get(url)
+# result = html_text.text
+# 
+# print(f'{str(day).zfill(2)}.{str(month).zfill(2)}.{year}')             
+            
 
 # date = soup.find('button', class_ = 'datepicker-filter_button').text
 # #print(date)
@@ -83,7 +129,3 @@ with open('url_list.txt', 'a') as file:
 # years = range(1996, now_year)
 # for year in years:
 #     print(year+1)
-
-
-
-# Доллары появились начиная с 1996г
