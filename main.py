@@ -73,17 +73,14 @@ with open('datasets/url_list.txt') as file:
      for line in lines:
           html_text = requests.get(line, headers=headers)
           result = html_text.text
-          print(count)
-          soup = BeautifulSoup(result, 'lxml')
           
-          date = soup.find('button', class_ = 'datepicker-filter_button').text
+          soup = BeautifulSoup(result, 'lxml')
           try:
-            course = soup.find('td', string = 'USD').find_next().find_next().find_next().text
-          except:
-               print(None)
+               date = soup.find('button', class_ = 'datepicker-filter_button').text               
+               course = soup.find('td', string = 'USD').find_next().find_next().find_next().text
+          except:               
                pass
           data.append(f'{date}, {course}')
-          sleep(random.randrange(1, 3))
           count += 1
           if count % 100 == 0:
                print(f'Загружено {count} дней')         
@@ -94,38 +91,4 @@ with open('datasets/dataset.csv', 'a') as file:
           file.write(f'{line}\n')
 
 
-# url = 'https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=02.07.2004'
-# html_text = requests.get(url, headers=headers)
-# result = html_text.text
-# soup = BeautifulSoup(result, 'lxml')
 
-# date = soup.find('button', class_ = 'datepicker-filter_button').text
-# find_usd = soup.find('td', string = 'USD').text
-# course = soup.find('td', string = 'USD').find_next().find_next().find_next().text
-
-# print(f'Страна: {find_usd}, курс: {course}, на {date}') 
-     
-          
-     
-    
-
-# course = block_usd.find_all('td')[4].text
-# print(course)
-
-
-# html_text = requests.get(url)
-# result = html_text.text
-# 
-# print(f'{str(day).zfill(2)}.{str(month).zfill(2)}.{year}')             
-            
-
-# date = soup.find('button', class_ = 'datepicker-filter_button').text
-# #print(date)
-# days = range(1, 31)
-# for day in days:
-#     print(day+1)
-# now_year =  datetime.now().year
-# manth = datetime.now().month
-# years = range(1996, now_year)
-# for year in years:
-#     print(year+1)
