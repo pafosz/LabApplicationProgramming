@@ -1,15 +1,7 @@
-import os
 from bs4 import BeautifulSoup
-import bs4
-import requests
-import re
-from re import sub
-from decimal import Decimal
-import io
-from datetime import datetime 
-import random
-from time import sleep
 import csv
+from datetime import datetime 
+import requests
 
 now_year = datetime.now().year 
 now_month = datetime.now().month
@@ -58,7 +50,7 @@ for year in range(1996, now_year+1):
 
 with open('datasets/url_list.txt', 'a') as file:
      for line in url_list:
-        file.write(f'{line}\n') 
+         file.write(f'{line}\n') 
 
 headers = {
      "Accept": "*/*", 
