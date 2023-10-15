@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-def parser(path_for_read: str, ) -> list:
+def parser(path_for_read: str) -> list:
     
      headers = {
      "Accept": "*/*", 
@@ -29,7 +29,7 @@ def parser(path_for_read: str, ) -> list:
                      print(f'Загружено {count} дней')
      return data         
  
-def upload_csv(parser_data: list, path_for_read: str, path_for_upload: str) -> None:
+def upload_csv(path_for_read: str, path_for_upload: str) -> None:
     # path = 'datasets/dataset.csv'
     parser_data = parser(path_for_read)
     with open(path_for_upload, 'a') as file:
