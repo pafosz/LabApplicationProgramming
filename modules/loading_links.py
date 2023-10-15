@@ -26,24 +26,17 @@ def writes_links_list(since_year: int) -> list:
      for year in range(since_year, now_year+1):     
          for month in range(1, 13):          
               if year == now_year and month > now_month and day >= now_day:
-                  break
-          
+                  break          
               day = 1  
+              while day <= days_in_month(month, year):     
+                  url = f'https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To={str(day).zfill(2)}.{str(month).zfill(2)}.{year}'
+                  url_list.append(url)
 
-              while day <= days_in_month(month, year):   
-               
-               if year == since_year and month == 1 and day <= 4:
-                   day += 1   
-                   continue 
-
-               url = f'https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To={str(day).zfill(2)}.{str(month).zfill(2)}.{year}'
-               url_list.append(url)
-
-               if year == now_year and month == now_month and day >= now_day:
-                   break
+                  if year == now_year and month == now_month and day >= now_day:
+                      break
           
-               day += 1
-               return url_list
+                  day += 1
+     return url_list
 
 def writes_list_file(path_for_upload: str, since_year: int) -> None:
     url_list = writes_links_list(since_year)

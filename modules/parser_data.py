@@ -21,12 +21,12 @@ def parser(path_for_read: str) -> list:
                 try:
                      date = soup.find('button', class_ = 'datepicker-filter_button').text               
                      course = soup.find('td', string = 'USD').find_next().find_next().find_next().text.replace(',', '.')
-                except:               
-                     pass
-                data.append(f'{date}, {course}')
-                count += 1
-                if count % 100 == 0:
-                     print(f'Загружено {count} дней')
+                     data.append(f'{date}, {course}')                
+                except: 
+                     data.append(f'{date}, -')                              
+                
+                count += 1                
+                print(f'Загружено {count} дней')
      return data         
  
 def upload_csv(path_for_read: str, path_for_upload: str) -> None:
