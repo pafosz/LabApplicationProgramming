@@ -14,9 +14,13 @@ def parser(path_for_read: str) -> list:
            data = []
            count = 0
            for line in lines:
-                html_text = requests.get(line, headers=headers)
+                try:
+                    html_text = requests.get(line, headers=headers)
+                except:
+                    continue
+                print(html_text.status_code)
                 result = html_text.text
-          
+
                 soup = BeautifulSoup(result, 'lxml')
                 try:
                      date = soup.find('button', class_ = 'datepicker-filter_button').text               
