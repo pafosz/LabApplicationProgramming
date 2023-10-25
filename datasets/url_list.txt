@@ -286,3 +286,13 @@ https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=12.
 https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=13.10.2023
 https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=14.10.2023
 https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=15.10.2023
+https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=16.10.2023
+https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=17.10.2023
+https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=18.10.2023
+https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=19.10.2023
+https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=20.10.2023
+https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=21.10.2023
+https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=22.10.2023
+https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=23.10.2023
+https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=24.10.2023
+https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=25.10.2023
