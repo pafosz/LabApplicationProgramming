@@ -1,13 +1,15 @@
 import csv
 import os
 from modules import add_functions as af
+import pandas as pd
+import datetime
 
 def division_date_and_data(directory_path: str, new_dir: str, file_path: str) -> None:
 
     path = os.getcwd() 
     os.chdir(directory_path)    
     
-    data = af.read_data('dataset.csv')
+    data = af.read_data(file_path)
    
     if not os.path.isdir(new_dir):
         os.mkdir(new_dir) 
@@ -45,9 +47,35 @@ def division_by_year(directory_path: str, new_dir: str, file_path: str) -> None:
             writer = csv.writer(file)
             writer.writerows(data_year)
     os.chdir(path)     
+
+
+
+def division_by_week(file_path: str, directory_path: str, new_dir: str) -> None:  
+    data = af.read_data(file_path)
+    path = os.getcwd()
+    os.chdir(directory_path) 
+    if not os.path.isdir(new_dir):
+        os.mkdir(new_dir)
+    os.chdir(new_dir)
+    day_of_week = 6
+    data_week = [data[0]]
+    for i in range(1, len(data) - 1):
+        if day_of_week >= 7:
+            data_week.append(data[i])
+            day_of_week = 0
+            a = "".join(data_week[0][0].split("-"))
+            b = "".join(data_week[len(data_week) - 1][0].split("-"))
+            with open(f"{a}_{b}.csv", 'w', encoding="utf-8", newline="") as file:
+                writer = csv.writer(file)
+                writer.writerows(data_week)
+            data_week.clear()
+            day_of_week += af.growth(data[i][0], data[i+1][0])
+            continue
+        data_week.append(data[i])
+        day_of_week += af.growth(data[i][0], data[i+1][0])
+    os.chdir(path)
+    
+    
                        
 
-# def division_by_week(directory_path: str, new_dir: str, file_path: str) -> None:
-#     data = af.read_data(file_path)
-#     path = os.getcwd()
-#     os.chdir(directory_path)
+ 
