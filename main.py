@@ -25,6 +25,8 @@ import matplotlib.pyplot as plt
 #     print(next(it))   
 path = "datasets/dataset.csv"
 df = pd.read_csv(path)
+
+print(df)
 # df = pd.DataFrame(df)
 # df['date'] = pd.to_datetime(df['date'])
 
@@ -33,7 +35,7 @@ df = pd.read_csv(path)
 # print(mm)
 
 
-pg.plot_graph_by_month(df, 7)
+
 
 
 

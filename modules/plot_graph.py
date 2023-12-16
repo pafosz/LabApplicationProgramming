@@ -2,6 +2,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def plot_graph_all_period(data_frame: pd.DataFrame) -> None:
+    '''
+    Plots the course change for all time.
+            Parameters:                    
+                    data_frame (pd.DataFrame): filtering data                   
+            Return value:
+                    None
+    '''
     data_frame['date'] = pd.to_datetime(data_frame['date'])
 
     plt.figure(figsize=(10, 6))
@@ -12,6 +19,14 @@ def plot_graph_all_period(data_frame: pd.DataFrame) -> None:
     plt.show()
 
 def plot_graph_by_month(data_frame: pd.DataFrame, month: str) -> None:
+    '''
+    Plots a graph with monthly values, median and mean.
+            Parameters:                    
+                    data_frame (pd.DataFrame): filtering data  
+                    month (str): a month for filtering                 
+            Return value:
+                    None
+    '''
     data_frame['date'] = pd.to_datetime(data_frame['date'])
     data_frame['month'] = data_frame['date'].dt.month
 
