@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 # # !autopep8 --in-place --aggressive --aggressive uglycodesample.py  
 
-# def main():
+#def main():
 #     # loading_links.writes_list_file('datasets/url_list.txt', 1993)
 #     # parser_data.upload_csv('datasets/url_list.txt', 'datasets/dataset.csv')   
 #     #af.replace_date_format('datasets/dataset.csv')
@@ -23,20 +23,28 @@ import matplotlib.pyplot as plt
 
 #     it = di.DataIterator()
 #     print(next(it))   
-path = "datasets/dataset.csv"
+path = "dataset1.csv"
 df = pd.read_csv(path)
 
+df['data'] = df['data'].str.replace('-', 'NaN')
+
+df['data'] = df['data'].astype(float)
+df.dropna(inplace=True)
+df.reset_index(drop=True, inplace=True)
+
 print(df)
+
+df.to_csv(path, index=False)
+
+  
+
+
 # df = pd.DataFrame(df)
 # df['date'] = pd.to_datetime(df['date'])
 
 # mm = cd.group_by_month(df)
 
 # print(mm)
-
-
-
-
 
 
 
